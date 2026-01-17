@@ -1,0 +1,1 @@
+Eslint Plugin TypedJs
