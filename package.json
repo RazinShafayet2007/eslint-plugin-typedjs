@@ -1,0 +1,27 @@
+{
+  "name": "eslint-plugin-typedjs",
+  "version": "0.1.0",
+  "description": "ESLint plugin for TypedJS – supports TypeScript-style annotations in plain JavaScript files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "typedjs",
+    "javascript",
+    "types",
+    "annotations"
+  ],
+  "author": "Razin Shafayet",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-typescript": "^1.4.13"
+  }
+}
