@@ -1,27 +1,6 @@
-// Updated index.js for eslint-plugin-typedjs – Parser as object for flat config compatibility
+// index.js (updated – CommonJS, fixed)
 
-const acorn = require("acorn");
-const acornTS = require("acorn-typescript");
-
-const tsFactory = acornTS.default || acornTS;
-const tsPlugin = tsFactory();
-
-const TypedJSParser = acorn.Parser.extend(tsPlugin);
-
-// Export parser as object with parseForESLint (preferred by ESLint)
-const parser = {
-  parse(code, options) {
-    return TypedJSParser.parse(code, options);
-  },
-  parseForESLint(code, options) {
-    return {
-      ast: TypedJSParser.parse(code, options),
-      services: {},
-      visitorKeys: TypedJSParser.acorn.visitorKeys || {},
-      scopeManager: null
-    };
-  }
-};
+const parser = require("./lib/parser");
 
 module.exports = {
   meta: {
@@ -32,31 +11,20 @@ module.exports = {
     recommended: [
       {
         languageOptions: {
-          parser: parser,  // Now an object with parse/parseForESLint
+          parser: parser,
           ecmaVersion: 2024,
-          sourceType: "module",
-          globals: {
-            process: "readonly",
-            Buffer: "readonly",
-            console: "readonly",
-            global: "readonly",
-            __dirname: "readonly",
-            __filename: "readonly",
-            exports: "readonly",
-            module: "readonly",
-            require: "readonly"
-          }
+          sourceType: "module"
         },
         plugins: {
           typedjs: module.exports
+        },
+        rules: {
+          "typedjs/no-op": "warn"
         }
       }
     ]
   },
   rules: {
-    "no-op": {
-      meta: { type: "suggestion" },
-      create() { return {}; }
-    }
+    "no-op": require("./lib/rules/no-op")
   }
 };
