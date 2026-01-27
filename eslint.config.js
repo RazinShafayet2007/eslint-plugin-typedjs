@@ -1,13 +1,18 @@
-// eslint.config.js (new file in plugin root – for linting the plugin itself)
+const path = require('path');
 
 module.exports = [
-    {
-      languageOptions: {
-        ecmaVersion: 2024,
-        sourceType: "commonjs"
-      },
-      rules: {
-        "no-undef": "off"  // Lenient for dev
-      }
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      parser: require('./lib/parser.js'),
+      ecmaVersion: 2024,
+      sourceType: "module"
+    },
+    plugins: {
+      typedjs: require('./index.js')
+    },
+    rules: {
+      "typedjs/no-op": "error"
     }
-  ];
+  }
+];

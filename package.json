@@ -4,6 +4,9 @@
   "description": "ESLint plugin for TypedJS – supports TypeScript-style annotations in plain JavaScript files",
   "main": "index.js",
   "type": "commonjs",
+  "bin": {
+    "typedjs-eslint": "./bin/typedjs-eslint.js"
+  },
   "scripts": {
     "test": "mocha tests --recursive",
     "lint": "eslint ."
